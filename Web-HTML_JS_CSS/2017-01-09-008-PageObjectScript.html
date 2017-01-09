@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title> Web Application</title>
+    <script>
+        var person={
+		firsrName : "Dong",
+		lastName : "Yang",
+		age : 24,
+		introduction: function(){
+		return "My name is "+this.firsrName +" "+ this.lastName+ ", I am "+this.age+" years old"; 
+		}
+		}
+		function introMe(){
+			document.getElementById("demo").innerHTML=person.introduction();
+		}
+		function introFun(){
+			document.getElementById("demo").innerHTML=person.introduction;
+		}
+    </script>
+       
+    </head>
+    
+    <body>
+        <h1> 第一个纯手工书写的Web页面 </h1>
+        <p id="demo" onclick="introMe()">Introduction</p>
+        <button type="button" onclick="introMe()">Click Me, Return Introduction</p>
+		
+        <button type="button" onclick="introFun()">Click Me, Return Function</p>
+        
+ 
+    </body>
+        
+</html>
