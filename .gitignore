@@ -4,6 +4,25 @@
 *.o
 *.obj
 
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.VC.db
+*.sdf  
+*.opensdf  
+*.vcxproj.user
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
 # Precompiled Headers
 *.gch
 *.pch
