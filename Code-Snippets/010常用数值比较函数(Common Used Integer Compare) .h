@@ -1,11 +1,11 @@
-#
-//Çó×î´óÖµ
+ï»¿#
+//æ±‚æœ€å¤§å€¼
 static inline int MaxValue(int x, int y)
 {
     return (x > y) ? x : y;
 }
 
-//Çó×îĞ¡Öµ
+//æ±‚æœ€å°å€¼
 static inline int MinValue(int x, int y)
 {
     return (x < y) ? x : y;
