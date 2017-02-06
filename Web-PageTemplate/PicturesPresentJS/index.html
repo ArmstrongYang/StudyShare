@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我们的相册 - @hiyangdong</title>
+<!-- include CSS always before including js -->
+<link type="text/css" rel="stylesheet" href="css/tn3.css"></link>
+<!-- include jQuery library -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- include tn3 plugin -->
+<script type="text/javascript" src="js/jquery.tn3lite.min.js"></script>
+<!--  initialize the TN3 when the DOM is ready -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$("h4").html("<b>Our Picture!</b>");
+	$("img").html("<b>Our Picture!</b>");
+	
+	var tn1 = $('.mygallery').tn3({
+		skinDir:"skins",
+		imageClick:"fullscreen",
+		image:{
+		maxZoom:1.5,
+		crop:true,
+		clickEvent:"dblclick",
+		transitions:[{
+		type:"blinds"
+		},{
+		type:"grid"
+		},{
+		type:"grid",
+		duration:460,
+		easing:"easeInQuad",
+		gridX:1,
+		gridY:8,
+		// flat, diagonal, circle, random
+		sort:"random",
+		sortReverse:false,
+		diagonalStart:"bl",
+		// fade, scale
+		method:"scale",
+		partDuration:360,
+		partEasing:"easeOutSine",
+		partDirection:"left"
+		}]
+		}
+	});
+});
+</script>
+</head>
+<body>
+<!-- 代码 开始 -->
+<div id="content">
+    <div class="mygallery clearfix">
+	<div class="tn3 album">
+
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-01.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-01.jpg" />
+		    </a>
+		</li>
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-02.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-02.jpg" />
+		    </a>
+		</li>
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-03.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Chengdu-20160422-03.jpg" />
+		    </a>
+		</li>
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Luguhu-20160501-01.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Luguhu-20160501-01.jpg" />
+		    </a>
+		</li>
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Luguhu-20160501-02.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Luguhu-20160501-02.jpg" />
+		    </a>
+		</li>
+		<li>
+		    <h4></h4>
+		    <a href="http://www.hifamily.cc:82/Favorites/Shanghai-20161001-06.jpg">
+			<img src="http://www.hifamily.cc:82/Favorites/Shanghai-20161001-06.jpg" />
+		    </a>
+		</li>
+		
+
+	</div>
+    </div>
+</div>
+<!-- 代码 结束 -->
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sucai.aspku.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>

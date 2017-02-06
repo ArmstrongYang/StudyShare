@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>扁平html5音乐播放器代码 - 站长素材</title>
+    <link rel="stylesheet" type="text/css" href="Css/tplayer.css" />
+    <link rel="stylesheet" type="text/css" href="Plugins/FontAwesome4.1/css/font-awesome.min.css" />
+    <script src="Js/jquery.js"></script>
+    <script src="Js/jquery-ui.js"></script>
+    <script src="Js/tPlayer.js"></script>
+</head>
+<body>
+    <div id="t_wrapper">
+        <div id="t_cover">
+        	<img src="Images/logo.png">
+        </div>
+    	<div id="t_top">
+    		<div id="t_title_info">
+    			<span class="artist"></span>
+    			<span class="title"></span>
+    		</div>
+    	</div>
+    	<div id="t_middle">
+    		<div id="play"></div>
+    		<div id="pause" class="hidden">
+    		</div>
+    		<div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" id="t_progress">
+                <div id="trackInfo">
+                    <div id="error">
+    				</div>
+                    <div id="current">0:00</div>
+                    <div id="duration">0:00</div>
+    			</div>
+    			<div style="width: 0%;" class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"></div>
+            	<span style="left: 0%;" class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+            </div>
+    		<span id="prev"></span>
+            <span id="next"></span>
+    	</div>
+    	<div id="t_bottom">
+            <div id="range">
+                <div id="val"></div>
+                <div id="vol"></div>
+                <div id="rangeVal"></div>
+            </div>
+            <div id="t_pls_show" class="noselectpls"></div>
+    	</div>
+    </div>
+    <div id="playlist">
+        <ul>
+            <li t_cover="goldfrapp.jpg" t_artist="Transformers2" t_name="Transformers2">
+            	<a href="#">Goldfrapp –Jo</a>
+            	<audio preload="none">
+                    <source src="Media/Transformers2.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+            	</audio>
+            </li>
+            <li t_cover="Moby.jpg" t_artist="Moby" t_name="The Last Day (with Skylar Grey)">
+            	<a href="#">Moby – The Last Day (with Skylar Grey)</a>
+                <audio preload="none">
+                    <source src="Media/Transformers2.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="lina.jpg" t_artist="LINA nananan" t_name="JIENIFO">
+            	<a href="#">LINA nananan– JIENIFO</a>
+                <audio preload="none">
+                    <source src="Media/Transformers2.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="birdy.jpg" t_artist="Birdy" t_name="Shelter">
+            	<a href="#">Birdy – Shelter</a>
+                <audio preload="none">
+                    <source src="Media/Transformers2.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+        </ul>
+    </div>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sucai.aspku.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>

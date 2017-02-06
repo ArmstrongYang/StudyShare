@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>My Awesome Page</title>
+        <script type = "text/javascript">
+        function oprationCallBack(progress,data){
+                alert(progress +'::'+data);
+            }
+        
+        
+        function errorCallBack(err){
+            alert(err);
+        }
+        
+        
+        
+        function start(){
+            
+            rd.bluetooth.start(oprationCallBack,errorCallBack,'shenyong');
+        }
+        
+        
+        
+        function sendString(){
+            rd.bluetooth.send('STRING','hello World');
+        }
+        
+        function sendURL(){
+            rd.bluetooth.send('FILE','data://abc');
+        }
+        
+        function sendImageOrVideo(){
+             rd.bluetooth.send('ALBUM');
+        }
+        
+        function stop(){
+            rd.bluetooth.stop();
+        }
+        
+            </script>
+        
+    </head>
+    <body>
+        <h1 >蓝牙传输文件</h1>
+        <h2  onclick ="start()">start</h2>
+        <h2  onclick ="sendString()">sendString</h2>
+        <h2  onclick ="sendURL()">sendURL</h2>
+        <h2  onclick ="sendImageOrVideo()">sendImageOrVideo</h2>
+        <h2  onclick ="stop()">stop</h2>
+        
+    </body>
+</html>
+
