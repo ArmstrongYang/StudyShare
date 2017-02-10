@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Spark-Python", "Spark-Python.pyproj", "{0F756EFD-2F6D-461C-BD9B-673328BEDC81}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Spark-ML", "Spark-ML.pyproj", "{B53E8159-4C57-4A03-900D-8CA0A0DBF9B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F756EFD-2F6D-461C-BD9B-673328BEDC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F756EFD-2F6D-461C-BD9B-673328BEDC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53E8159-4C57-4A03-900D-8CA0A0DBF9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53E8159-4C57-4A03-900D-8CA0A0DBF9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

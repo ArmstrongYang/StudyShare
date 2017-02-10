@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0f756efd-2f6d-461c-bd9b-673328bedc81}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>spark_data.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="metastore_db\log\README_DO_NOT_TOUCH_FILES.txt" />
+    <Content Include="metastore_db\README_DO_NOT_TOUCH_FILES.txt" />
+    <Content Include="metastore_db\seg0\README_DO_NOT_TOUCH_FILES.txt" />
+    <Content Include="words-large.txt" />
+    <Content Include="words.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="examples\als.py" />
+    <Compile Include="examples\avro_inputformat.py" />
+    <Compile Include="examples\kmeans.py" />
+    <Compile Include="examples\logistic_regression.py" />
+    <Compile Include="examples\mllib\binary_classification_metrics_example.py" />
+    <Compile Include="examples\mllib\bisecting_k_means_example.py" />
+    <Compile Include="examples\mllib\correlations.py" />
+    <Compile Include="examples\mllib\correlations_example.py" />
+    <Compile Include="examples\mllib\decision_tree_classification_example.py" />
+    <Compile Include="examples\mllib\decision_tree_regression_example.py" />
+    <Compile Include="examples\mllib\elementwise_product_example.py" />
+    <Compile Include="examples\mllib\fpgrowth_example.py" />
+    <Compile Include="examples\mllib\gaussian_mixture_example.py" />
+    <Compile Include="examples\mllib\gaussian_mixture_model.py" />
+    <Compile Include="examples\mllib\gradient_boosting_classification_example.py" />
+    <Compile Include="examples\mllib\gradient_boosting_regression_example.py" />
+    <Compile Include="examples\mllib\hypothesis_testing_example.py" />
+    <Compile Include="examples\mllib\hypothesis_testing_kolmogorov_smirnov_test_example.py" />
+    <Compile Include="examples\mllib\isotonic_regression_example.py" />
+    <Compile Include="examples\mllib\kernel_density_estimation_example.py" />
+    <Compile Include="examples\mllib\kmeans.py" />
+    <Compile Include="examples\mllib\k_means_example.py" />
+    <Compile Include="examples\mllib\latent_dirichlet_allocation_example.py" />
+    <Compile Include="examples\mllib\linear_regression_with_sgd_example.py" />
+    <Compile Include="examples\mllib\logistic_regression.py" />
+    <Compile Include="examples\mllib\logistic_regression_with_lbfgs_example.py" />
+    <Compile Include="examples\mllib\multi_class_metrics_example.py" />
+    <Compile Include="examples\mllib\multi_label_metrics_example.py" />
+    <Compile Include="examples\mllib\naive_bayes_example.py" />
+    <Compile Include="examples\mllib\normalizer_example.py" />
+    <Compile Include="examples\mllib\power_iteration_clustering_example.py" />
+    <Compile Include="examples\mllib\random_forest_classification_example.py" />
+    <Compile Include="examples\mllib\random_forest_regression_example.py" />
+    <Compile Include="examples\mllib\random_rdd_generation.py" />
+    <Compile Include="examples\mllib\ranking_metrics_example.py" />
+    <Compile Include="examples\mllib\recommendation_example.py" />
+    <Compile Include="examples\mllib\regression_metrics_example.py" />
+    <Compile Include="examples\mllib\sampled_rdds.py" />
+    <Compile Include="examples\mllib\standard_scaler_example.py" />
+    <Compile Include="examples\mllib\stratified_sampling_example.py" />
+    <Compile Include="examples\mllib\streaming_k_means_example.py" />
+    <Compile Include="examples\mllib\streaming_linear_regression_example.py" />
+    <Compile Include="examples\mllib\summary_statistics_example.py" />
+    <Compile Include="examples\mllib\svm_with_sgd_example.py" />
+    <Compile Include="examples\mllib\tf_idf_example.py" />
+    <Compile Include="examples\mllib\word2vec.py" />
+    <Compile Include="examples\mllib\word2vec_example.py" />
+    <Compile Include="examples\ml\aft_survival_regression.py" />
+    <Compile Include="examples\ml\als_example.py" />
+    <Compile Include="examples\ml\binarizer_example.py" />
+    <Compile Include="examples\ml\bisecting_k_means_example.py" />
+    <Compile Include="examples\ml\bucketizer_example.py" />
+    <Compile Include="examples\ml\chisq_selector_example.py" />
+    <Compile Include="examples\ml\count_vectorizer_example.py" />
+    <Compile Include="examples\ml\cross_validator.py" />
+    <Compile Include="examples\ml\dataframe_example.py" />
+    <Compile Include="examples\ml\dct_example.py" />
+    <Compile Include="examples\ml\decision_tree_classification_example.py" />
+    <Compile Include="examples\ml\decision_tree_regression_example.py" />
+    <Compile Include="examples\ml\elementwise_product_example.py" />
+    <Compile Include="examples\ml\estimator_transformer_param_example.py" />
+    <Compile Include="examples\ml\gaussian_mixture_example.py" />
+    <Compile Include="examples\ml\generalized_linear_regression_example.py" />
+    <Compile Include="examples\ml\gradient_boosted_tree_classifier_example.py" />
+    <Compile Include="examples\ml\gradient_boosted_tree_regressor_example.py" />
+    <Compile Include="examples\ml\index_to_string_example.py" />
+    <Compile Include="examples\ml\isotonic_regression_example.py" />
+    <Compile Include="examples\ml\kmeans_example.py" />
+    <Compile Include="examples\ml\lda_example.py" />
+    <Compile Include="examples\ml\linear_regression_with_elastic_net.py" />
+    <Compile Include="examples\ml\logistic_regression_summary_example.py" />
+    <Compile Include="examples\ml\logistic_regression_with_elastic_net.py" />
+    <Compile Include="examples\ml\max_abs_scaler_example.py" />
+    <Compile Include="examples\ml\min_max_scaler_example.py" />
+    <Compile Include="examples\ml\multiclass_logistic_regression_with_elastic_net.py" />
+    <Compile Include="examples\ml\multilayer_perceptron_classification.py" />
+    <Compile Include="examples\ml\naive_bayes_example.py" />
+    <Compile Include="examples\ml\normalizer_example.py" />
+    <Compile Include="examples\ml\n_gram_example.py" />
+    <Compile Include="examples\ml\onehot_encoder_example.py" />
+    <Compile Include="examples\ml\one_vs_rest_example.py" />
+    <Compile Include="examples\ml\pca_example.py" />
+    <Compile Include="examples\ml\pipeline_example.py" />
+    <Compile Include="examples\ml\polynomial_expansion_example.py" />
+    <Compile Include="examples\ml\quantile_discretizer_example.py" />
+    <Compile Include="examples\ml\random_forest_classifier_example.py" />
+    <Compile Include="examples\ml\random_forest_regressor_example.py" />
+    <Compile Include="examples\ml\rformula_example.py" />
+    <Compile Include="examples\ml\sql_transformer.py" />
+    <Compile Include="examples\ml\standard_scaler_example.py" />
+    <Compile Include="examples\ml\stopwords_remover_example.py" />
+    <Compile Include="examples\ml\string_indexer_example.py" />
+    <Compile Include="examples\ml\tf_idf_example.py" />
+    <Compile Include="examples\ml\tokenizer_example.py" />
+    <Compile Include="examples\ml\train_validation_split.py" />
+    <Compile Include="examples\ml\vector_assembler_example.py" />
+    <Compile Include="examples\ml\vector_indexer_example.py" />
+    <Compile Include="examples\ml\vector_slicer_example.py" />
+    <Compile Include="examples\ml\word2vec_example.py" />
+    <Compile Include="examples\pagerank.py" />
+    <Compile Include="examples\parquet_inputformat.py" />
+    <Compile Include="examples\pi.py" />
+    <Compile Include="examples\sort.py" />
+    <Compile Include="examples\sql\basic.py" />
+    <Compile Include="examples\sql\datasource.py" />
+    <Compile Include="examples\sql\hive.py" />
+    <Compile Include="examples\sql\streaming\structured_kafka_wordcount.py" />
+    <Compile Include="examples\sql\streaming\structured_network_wordcount.py" />
+    <Compile Include="examples\sql\streaming\structured_network_wordcount_windowed.py" />
+    <Compile Include="examples\status_api_demo.py" />
+    <Compile Include="examples\streaming\direct_kafka_wordcount.py" />
+    <Compile Include="examples\streaming\flume_wordcount.py" />
+    <Compile Include="examples\streaming\hdfs_wordcount.py" />
+    <Compile Include="examples\streaming\kafka_wordcount.py" />
+    <Compile Include="examples\streaming\network_wordcount.py" />
+    <Compile Include="examples\streaming\network_wordjoinsentiments.py" />
+    <Compile Include="examples\streaming\queue_stream.py" />
+    <Compile Include="examples\streaming\recoverable_network_wordcount.py" />
+    <Compile Include="examples\streaming\sql_network_wordcount.py" />
+    <Compile Include="examples\streaming\stateful_network_wordcount.py" />
+    <Compile Include="examples\transitive_closure.py" />
+    <Compile Include="examples\wordcount.py" />
+    <Compile Include="spark_connect.py" />
+    <Compile Include="spark_data.py" />
+    <Compile Include="spark_parallelize.py" />
+    <Compile Include="line_count.py" />
+    <Compile Include="word_count-large.py" />
+    <Compile Include="word_count.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="examples" />
+    <Folder Include="examples\ml" />
+    <Folder Include="examples\mllib" />
+    <Folder Include="examples\sql" />
+    <Folder Include="examples\sql\streaming" />
+    <Folder Include="examples\streaming" />
+    <Folder Include="metastore_db" />
+    <Folder Include="metastore_db\log" />
+    <Folder Include="metastore_db\seg0" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
