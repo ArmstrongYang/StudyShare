@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b53e8159-4c57-4a03-900d-8ca0a0dbf9b8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Spark_ML.py</StartupFile>
+    <StartupFile>numpy_array.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="numpy_array.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Spark_ML.py" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,78 @@
+/* IE 7-8 STYLES */
+ul#main-menu li ul li,
+ul#main-menu li ul li:first-child{
+	margin-bottom:-3px;}
+
+#slider-middle-navi a,
+.social_links a,
+.tag-link,
+.project-navi a,
+.btn, .btn span, .btn input,
+.pager a,
+.title-text b,
+ul.our-work-scheeme li,
+.icons a,
+.desc-container{
+	//display:inline;
+	//zoom:1;}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select,
+.backtop,
+.ico_link,
+#t-navi-prev,
+#t-navi-next,
+.progress-bar,
+.tab-navi > ul > li,
+.tab-navi > ul > li > a,
+.tab-content,
+.btn-grey,
+.accordation-item,
+.plan-header,
+.premium-plan,
+.pricing-box,
+.pricing-box-header,
+.contact-form input[type=text],
+.contact-form textarea,
+.tag-link,
+.recent-box,
+ul.our-work-scheeme li.last-li,
+ul.block-filtered-items li a.fancybox,
+.map-box,
+.desc-container-box,
+.inner-img,
+.comment-avatar,
+.hm-text{
+	behavior: url(layout/scripts/PIE.htc);}
+#t-navi-prev,
+#t-navi-next{
+	margin-top:-27px;}
+
+.full-width.sub-title{
+	//padding-bottom:10px;}
+.plan-month{
+	width:100%;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=54);}
+
+.over-ipl{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);}
+li:hover > .over-ipl{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);}
+
+.social_links a img,
+.social_links a .title-text{
+	visibility:hidden;}
+.social_links a img:first-child{
+	visibility:visible;}
+.social_links a:hover img,
+.social_links a:hover .title-text{
+	visibility:visible;}
+.social_links a:hover img:first-child{
+	visibility:hidden;}
+
+ul.our-team-list li{
+	margin-right:15px;}
