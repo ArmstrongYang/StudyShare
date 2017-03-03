@@ -1,0 +1,1 @@
+mongod --dbpath E:/onedrive/databases --port 2222
