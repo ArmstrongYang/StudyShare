@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>71e6fbca-a884-4a00-9be7-de1326578763</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>onedriveDownloadUrl.py</StartupFile>
+    <StartupFile>Onedrive.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Onedrive.py" />
+    <Compile Include="onedriveFileList.py" />
+    <Compile Include="onedriveThumbnails.py" />
     <Compile Include="onedriveItemList.py" />
     <Compile Include="onedriveDownloadUrl.py" />
     <Compile Include="onedriveShare.py" />

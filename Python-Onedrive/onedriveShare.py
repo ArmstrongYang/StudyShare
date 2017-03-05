@@ -28,8 +28,7 @@ def get_sharing_link(client, item_id):
 
 get_sharing_link(client,id_of_file)
 # ['webUrl']	'https://1drv.ms/i/s!AKFapaZo-Vpii5h6'	str
-# ['@content.downloadUrl']
-#'https://public-dm2306.files.1drv.com/y3m0iWGp0ppFxsnlDETu1FshFlUvKgc3eOPFL5no-G8OGXnx4gUCn5wv8gHTz7sltcKjtVueP6LjfduHOU1xZI6nvqGBB5pIDzeUCNplD89KCUK_6hCEckiUkQZ1ELKk0Ite5Ob6V4G8io2YY77BgY_bQs2KuFVAfdih8TylyZjLwOvsBmt4kYpbIn1DqUw9wohd7s37jQOS63cYKZzz-moU3rPm3i15kSttF4UCJmcRnY'
+
 if __name__=='__main__':
     print(__file__)
     exit(0)
