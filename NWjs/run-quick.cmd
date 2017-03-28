@@ -1,0 +1,1 @@
+D:\Apps\NWjs\nw.exe E:\Documents\StudyShare\NWjs\quick-start
