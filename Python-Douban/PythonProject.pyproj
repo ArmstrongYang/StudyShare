@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>71e6fbca-a884-4a00-9be7-de1326578763</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>date_formate.py</StartupFile>
+    <StartupFile>douban_search_fail.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,11 +22,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="calendar_fun.py" />
-    <Compile Include="file_split.py" />
-    <Compile Include="date_formate.py" />
+    <Compile Include="douban_apis.py" />
+    <Compile Include="douban_search_fail.py" />
     <Compile Include="PythonTest.py" />
-    <Compile Include="PythonFile.py" />
+    <Compile Include="douban_top250.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
