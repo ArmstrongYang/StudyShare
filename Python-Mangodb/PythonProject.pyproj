@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>71e6fbca-a884-4a00-9be7-de1326578763</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>mongo-toollists.py</StartupFile>
+    <StartupFile>mongo.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="mongo.py" />
     <Compile Include="mongo-toollists.py" />
     <Compile Include="PythonTest.py" />
     <Compile Include="PythonFile.py" />

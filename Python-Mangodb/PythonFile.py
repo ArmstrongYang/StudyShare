@@ -3,7 +3,7 @@ import pymongo
 
 # default 27017
 # 需要通过cmd打开数据库服务器：mongod --dbpath=E:/onedrive/databases
-client = pymongo.MongoClient('localhost', 27017)
+client = pymongo.MongoClient('localhost', 2222)
 # or
 #client = pymongo.MongoClient('mongodb://localhost:27017/')  
 
@@ -41,7 +41,7 @@ data_add = [{'time': time.time()+2,
              'content':"This is the data for searching time"
             }
            ]
-result = db.test.insert_many(data_add)
+result = db.blog.insert_many(data_add)
 account = db.test
 # or
 # account = db.get_collection('test')
