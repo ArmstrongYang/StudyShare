@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?> <info> <intro>保存用户的信息</intro> <list id='001'> <head>auto_userone</head> <name>Jordy</name> <number>12345678</number> <age>20</age> <sex>男</sex> <hobby>上网</hobby> </list> <list id='002'> <head>auto_usertwo</head> <name>功夫</name> <number>34443678</number> <age>18</age> <sex>男</sex> <hobby>功夫</hobby> </list> </info>
