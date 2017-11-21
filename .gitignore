@@ -46,3 +46,4 @@ bld/
 *.exe
 *.out
 *.app
+*.ipch
