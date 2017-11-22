@@ -109,11 +109,12 @@ int contours_face(int argc, char**)
 
 int circle()
 {
-	Mat imageSource = imread("images/circle.png", 0);
+	Mat imageSource = imread("images/stone.png", 0);
 	imshow("Source Image", imageSource);
 	Mat image;
 	blur(imageSource, image, Size(3, 3));
 	threshold(image, image, 0, 255, CV_THRESH_OTSU);
+	threshold(image, image, 0, 255, THRESH_BINARY_INV);
 	imshow("Threshold Image", image);
 
 	//Ñ°ÕÒ×îÍâ²ãÂÖÀª
