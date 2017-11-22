@@ -2,9 +2,15 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
+#include <math.h>
+
+
+using namespace cv;
+using namespace std;
+
 int contoursShow()
 {
-	cv::Mat image = cv::imread("images/cells.png", 0);
+	cv::Mat image = cv::imread("images/box.png", 0);
 	cv::namedWindow("image");
 	cv::imshow("image", image);
 	cv::Mat binary;
@@ -24,12 +30,7 @@ int contoursShow()
 
 
 
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include <math.h>
-#include <iostream>
-using namespace cv;
-using namespace std;
+
 static void help()
 {
 	cout
@@ -106,9 +107,52 @@ int contours_face(int argc, char**)
 	return 0;
 }
 
+int circle()
+{
+	Mat imageSource = imread("images/circle.png", 0);
+	imshow("Source Image", imageSource);
+	Mat image;
+	blur(imageSource, image, Size(3, 3));
+	threshold(image, image, 0, 255, CV_THRESH_OTSU);
+	imshow("Threshold Image", image);
 
+	//寻找最外层轮廓
+	vector<vector<Point>> contours;
+	vector<Vec4i> hierarchy;
+	findContours(image, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_NONE, Point());
+
+	Mat imageContours = Mat::zeros(image.size(), CV_8UC1);	//最小外接矩形画布
+	Mat imageContours1 = Mat::zeros(image.size(), CV_8UC1); //最小外结圆画布
+	for (int i = 0; i<contours.size(); i++)
+	{
+		//绘制轮廓
+		drawContours(imageContours, contours, i, Scalar(255), 1, 8, hierarchy);
+		drawContours(imageContours1, contours, i, Scalar(255), 1, 8, hierarchy);
+
+
+		//绘制轮廓的最小外结矩形
+		RotatedRect rect = minAreaRect(contours[i]);
+		Point2f P[4];
+		rect.points(P);
+		for (int j = 0; j <= 3; j++)
+		{
+			line(imageContours, P[j], P[(j + 1) % 4], Scalar(255), 2);
+		}
+
+		//绘制轮廓的最小外结圆
+		Point2f center; float radius;
+		minEnclosingCircle(contours[i], center, radius);
+		circle(imageContours1, center, radius, Scalar(255), 2);
+
+	}
+	imshow("MinAreaRect", imageContours);
+	imshow("MinAreaCircle", imageContours1);
+	waitKey(0);
+	return 0;
+}
 
 int main(int argc, char** argv)
 {
-	contoursShow();
+	//contoursShow();
+	circle();
 }
