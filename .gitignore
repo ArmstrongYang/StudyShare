@@ -47,3 +47,4 @@ bld/
 *.out
 *.app
 *.ipch
+*.opendb

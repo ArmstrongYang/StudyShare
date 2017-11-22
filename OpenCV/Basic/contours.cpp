@@ -2,6 +2,7 @@
 
 #include "opencv2/imgproc.hpp"
 #include "opencv2/highgui.hpp"
+#include "contours.h"
 
 
 using namespace cv;
@@ -38,4 +39,13 @@ int contours(int argc, char** argv)
 	//}
 	waitKey(0);
 	return 0;
+}
+
+contours::contours()
+{
+}
+
+
+contours::~contours()
+{
 }
