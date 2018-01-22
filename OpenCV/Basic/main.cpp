@@ -1,206 +1,168 @@
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/opencv.hpp"
 #include <iostream>
-#include <math.h>
-
-
-using namespace cv;
 using namespace std;
+using namespace cv;
 
-int contoursShow()
+Mat g_srcImage, g_dstImage, g_grayImage, g_maskImage;//定义原始图、目标图、灰度图、掩模图  
+int g_nFillMode = 1;//漫水填充的模式  
+int g_nLowDifference = 20, g_nUpDifference = 20;//负差最大值、正差最大值  
+int g_nConnectivity = 4;//表示floodFill函数标识符低八位的连通值  
+int g_bIsColor = true;//是否为彩色图的标识符布尔值  
+bool g_bUseMask = false;//是否显示掩膜窗口的布尔值  
+int g_nNewMaskVal = 255;//新的重新绘制的像素值 
+
+static void ShowHelpText()
 {
-	cv::Mat image = cv::imread("images/box.png", 0);
-	cv::namedWindow("image");
-	cv::imshow("image", image);
-	cv::Mat binary;
-	cv::threshold(image, binary, 120, 255, cv::THRESH_BINARY);	//THRESH_BINARY_INV
-	cv::namedWindow("binary");
-	cv::imshow("binary", binary);
-	std::vector<std::vector<cv::Point>> contours;
-	cv::findContours(binary, contours, -1, cv::CHAIN_APPROX_NONE);
-	cv::Mat result(image.size(), CV_8U, cv::Scalar(128));
-	cv::drawContours(image, contours, -1, cv::Scalar(200), 2);
-	cv::namedWindow("contours");
-	cv::imshow("contours", image);
-	cv::waitKey(0);
-
-	return 0;
+	//输出一些帮助信息    
+	printf("\n\n\n\t欢迎来到漫水填充示例程序~\n\n");
+	printf("\n\n\t按键操作说明: \n\n"
+		"\t\t鼠标点击图中区域- 进行漫水填充操作\n"
+		"\t\t键盘按键【ESC】- 退出程序\n"
+		"\t\t键盘按键【1】-  切换彩色图/灰度图模式\n"
+		"\t\t键盘按键【2】- 显示/隐藏掩膜窗口\n"
+		"\t\t键盘按键【3】- 恢复原始图像\n"
+		"\t\t键盘按键【4】- 使用空范围的漫水填充\n"
+		"\t\t键盘按键【5】- 使用渐变、固定范围的漫水填充\n"
+		"\t\t键盘按键【6】- 使用渐变、浮动范围的漫水填充\n"
+		"\t\t键盘按键【7】- 操作标志符的低八位使用4位的连接模式\n"
+		"\t\t键盘按键【8】- 操作标志符的低八位使用8位的连接模式\n"
+		"\n\n\t\t\t\t\t\t\t\t by浅墨\n\n\n"
+	);
 }
 
-
-
-
-static void help()
+//鼠标消息onMouse回调函数  
+static void onMouse(int event, int x, int y, int, void*)
 {
-	cout
-		<< "\nThis program illustrates the use of findContours and drawContours\n"
-		<< "The original image is put up along with the image of drawn contours\n"
-		<< "Usage:\n"
-		<< "./contours2\n"
-		<< "\nA trackbar is put up which controls the contour level from -3 to 3\n"
-		<< endl;
-}
-const int w = 500;
-int levels = 3;
-vector<vector<Point> > contours;
-vector<Vec4i> hierarchy;
-static void on_trackbar(int, void*)
-{
-	Mat cnt_img = Mat::zeros(w, w, CV_8UC3);
-	int _levels = levels - 3;
-	drawContours(cnt_img, contours, _levels <= 0 ? 3 : -1, Scalar(128, 255, 255),
-		3, LINE_AA, hierarchy, std::abs(_levels));
-	imshow("contours", cnt_img);
-}
-int contours_face(int argc, char**)
-{
-	Mat img = Mat::zeros(w, w, CV_8UC1);
-	if (argc > 1)
+	// 若鼠标左键没有按下，便返回  
+	if (event != CV_EVENT_LBUTTONDOWN)
+		return;
+	//-------------------【<1>调用floodFill函数之前的参数准备部分】---------------  
+	Point seed = Point(x, y);
+	int LowDifference = (g_nFillMode == 0) ? 0 : g_nLowDifference;//空范围的漫水填充，此值设为0，否则设为全局的g_nLowDifference  
+	int UpDifference = g_nFillMode == 0 ? 0 : g_nUpDifference;//空范围的漫水填充，此值设为0，否则设为全局的g_nUpDifference  
+	int flags = g_nConnectivity + (g_nNewMaskVal << 8) +
+		(g_nFillMode == 1 ? CV_FLOODFILL_FIXED_RANGE : 0);//标识符的0~7位为g_nConnectivity，8~15位为g_nNewMaskVal左移8位的值，16~23位为CV_FLOODFILL_FIXED_RANGE或者0。  
+
+														  //随机生成bgr值  
+	int b = (unsigned)theRNG() & 255;//随机返回一个0~255之间的值  
+	int g = (unsigned)theRNG() & 255;//随机返回一个0~255之间的值  
+	int r = (unsigned)theRNG() & 255;//随机返回一个0~255之间的值  
+	Rect ccomp;//定义重绘区域的最小边界矩形区域  
+
+	Scalar newVal = g_bIsColor ? Scalar(b, g, r) : Scalar(r*0.299 + g * 0.587 + b * 0.114);//在重绘区域像素的新值，若是彩色图模式，取Scalar(b, g, r)；若是灰度图模式，取Scalar(r*0.299 + g*0.587 + b*0.114)  
+
+	Mat dst = g_bIsColor ? g_dstImage : g_grayImage;//目标图的赋值  
+	int area;
+
+	//--------------------【<2>正式调用floodFill函数】-----------------------------  
+	if (g_bUseMask)
 	{
-		help();
-		return -1;
+		threshold(g_maskImage, g_maskImage, 1, 128, CV_THRESH_BINARY);
+		area = floodFill(dst, g_maskImage, seed, newVal, &ccomp, Scalar(LowDifference, LowDifference, LowDifference),
+			Scalar(UpDifference, UpDifference, UpDifference), flags);
+		imshow("mask", g_maskImage);
 	}
-	//Draw 6 faces
-	for (int i = 0; i < 6; i++)
+	else
 	{
-		int dx = (i % 2) * 250 - 30;
-		int dy = (i / 2) * 150;
-		const Scalar white = Scalar(255);
-		const Scalar black = Scalar(0);
-		if (i == 0)
+		area = floodFill(dst, seed, newVal, &ccomp, Scalar(LowDifference, LowDifference, LowDifference),
+			Scalar(UpDifference, UpDifference, UpDifference), flags);
+	}
+
+	imshow("效果图", dst);
+	cout << area << " 个像素被重绘\n";
+}
+
+void main()
+{
+	//system("color 2F");//改变console字体颜色 
+	g_srcImage = imread("images/1-2-3-src.jpg", 1);//载入原图  
+	if (!g_srcImage.data) { printf("Oh，no，读取图片image0错误~！ \n"); return; }
+	ShowHelpText();
+
+	g_srcImage.copyTo(g_dstImage);//拷贝源图到目标图  
+								  //cvtColor(g_srcImage, g_grayImage, COLOR_BGR2GRAY);//转换三通道的image0到灰度图  
+	g_maskImage.create(g_srcImage.rows + 2, g_srcImage.cols + 2, CV_8UC1);//利用image0的尺寸来初始化掩膜mask  
+
+	namedWindow("效果图", CV_WINDOW_NORMAL);
+	//创建Trackbar  
+	createTrackbar("负差最大值", "效果图", &g_nLowDifference, 255, 0);
+	createTrackbar("正差最大值", "效果图", &g_nUpDifference, 255, 0);
+	//鼠标回调函数  
+	setMouseCallback("效果图", onMouse, 0);
+
+	//循环轮询按键  
+	while (1)
+	{
+		//先显示效果图  
+		imshow("效果图", g_bIsColor ? g_dstImage : g_grayImage);
+		//获取键盘按键  
+		int c = waitKey(0);
+		//判断ESC是否按下，若按下便退出  
+		if ((c & 255) == 27)
 		{
-			for (int j = 0; j <= 10; j++)
+			cout << "程序退出...........\n";
+			break;
+		}
+
+		//根据按键的不同，进行各种操作  
+		switch ((char)c)
+		{
+		case '1':    //如果键盘“1”被按下，效果图在在灰度图，彩色图之间互换 
+			if (g_bIsColor)//若原来为彩色，转为灰度图，并且将掩膜mask所有元素设置为0  
 			{
-				double angle = (j + 5)*CV_PI / 21;
-				line(img, Point(cvRound(dx + 100 + j * 10 - 80 * cos(angle)),
-					cvRound(dy + 100 - 90 * sin(angle))),
-					Point(cvRound(dx + 100 + j * 10 - 30 * cos(angle)),
-						cvRound(dy + 100 - 30 * sin(angle))), white, 1, 8, 0);
+				cout << "键盘“1”被按下，切换彩色/灰度模式，当前操作为将【彩色模式】切换为【灰度模式】\n";
+				cvtColor(g_srcImage, g_grayImage, COLOR_BGR2GRAY);
+				g_maskImage = Scalar::all(0);   //将mask所有元素设置为0  
+				g_bIsColor = false; //将标识符置为false，表示当前图像不为彩色，而是灰度  
 			}
-		}
-		ellipse(img, Point(dx + 150, dy + 100), Size(100, 70), 0, 0, 360, white, -1, 8, 0);
-		ellipse(img, Point(dx + 115, dy + 70), Size(30, 20), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 185, dy + 70), Size(30, 20), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 115, dy + 70), Size(15, 15), 0, 0, 360, white, -1, 8, 0);
-		ellipse(img, Point(dx + 185, dy + 70), Size(15, 15), 0, 0, 360, white, -1, 8, 0);
-		ellipse(img, Point(dx + 115, dy + 70), Size(5, 5), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 185, dy + 70), Size(5, 5), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 150, dy + 100), Size(10, 5), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 150, dy + 150), Size(40, 10), 0, 0, 360, black, -1, 8, 0);
-		ellipse(img, Point(dx + 27, dy + 100), Size(20, 35), 0, 0, 360, white, -1, 8, 0);
-		ellipse(img, Point(dx + 273, dy + 100), Size(20, 35), 0, 0, 360, white, -1, 8, 0);
-	}
-	//show the faces
-	namedWindow("image", 1);
-	imshow("image", img);
-	//Extract the contours so that
-	vector<vector<Point> > contours0;
-	findContours(img, contours0, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
-	contours.resize(contours0.size());
-	for (size_t k = 0; k < contours0.size(); k++)
-		approxPolyDP(Mat(contours0[k]), contours[k], 3, true);
-	namedWindow("contours", 1);
-	createTrackbar("levels+3", "contours", &levels, 7, on_trackbar);
-	on_trackbar(0, 0);
-	waitKey();
-	return 0;
-}
-
-int circle_stone()
-{
-	Mat imageSource = imread("images/stone.png", 0);
-	imshow("Source Image", imageSource);
-	Mat image;
-	blur(imageSource, image, Size(3, 3));
-	threshold(image, image, 0, 255, CV_THRESH_OTSU);
-	threshold(image, image, 0, 255, THRESH_BINARY_INV);
-	imshow("Threshold Image", image);
-
-	//寻找最外层轮廓
-	vector<vector<Point>> contours;
-	vector<Vec4i> hierarchy;
-	findContours(image, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_NONE, Point());
-
-	Mat imageContours = Mat::zeros(image.size(), CV_8UC1);	//最小外接矩形画布
-	Mat imageContours1 = Mat::zeros(image.size(), CV_8UC1); //最小外结圆画布
-	for (int i = 0; i<contours.size(); i++)
-	{
-		//绘制轮廓
-		drawContours(imageContours, contours, i, Scalar(255), 1, 8, hierarchy);
-		drawContours(imageContours1, contours, i, Scalar(255), 1, 8, hierarchy);
-
-
-		//绘制轮廓的最小外结矩形
-		RotatedRect rect = minAreaRect(contours[i]);
-		Point2f P[4];
-		rect.points(P);
-		for (int j = 0; j <= 3; j++)
-		{
-			line(imageContours, P[j], P[(j + 1) % 4], Scalar(255), 2);
-		}
-
-		//绘制轮廓的最小外结圆
-		Point2f center; float radius;
-		minEnclosingCircle(contours[i], center, radius);
-		circle(imageContours1, center, radius, Scalar(255), 2);
-
-	}
-	imshow("MinAreaRect", imageContours);
-	imshow("MinAreaCircle", imageContours1);
-	waitKey(0);
-	return 0;
-}
-typedef vector<cv::Point> VP;
-VP FindBigestContour(Mat src) {
-	int imax = 0; //代表最大轮廓的序号
-	int imaxcontour = -1; //代表最大轮廓的大小
-	std::vector<std::vector<cv::Point>>contours;
-	findContours(src, contours, CV_RETR_LIST, CV_CHAIN_APPROX_SIMPLE);
-	for (int i = 0; i<contours.size(); i++) {
-		int itmp = contourArea(contours[i]);//这里采用的是轮廓大小
-		if (imaxcontour < itmp) {
-			imax = i;
-			imaxcontour = itmp;
-		}
-	}
-	return contours[imax];
-}
-int find_maxCircle()
-{
-	Mat src = imread("images/circle_one.png");
-	Mat temp;
-	cvtColor(src, temp, COLOR_BGR2GRAY);
-	threshold(temp, temp, 100, 255, THRESH_OTSU);
-	imshow("src", temp);
-	//寻找最大轮廓
-	VP VPResult = FindBigestContour(temp);
-	//寻找最大内切圆
-	int dist = 0;
-	int maxdist = 0;
-	Point center;
-	for (int i = 0; i<src.cols; i++)
-	{
-		for (int j = 0; j<src.rows; j++)
-		{
-			dist = pointPolygonTest(VPResult, cv::Point(i, j), true);
-			if (dist>maxdist)
+			else//若原来为灰度图，便将原来的彩图image0再次拷贝给image，并且将掩膜mask所有元素设置为0  
 			{
-				maxdist = dist;
-				center = cv::Point(i, j);
+				cout << "键盘“1”被按下，切换彩色/灰度模式，当前操作为将【彩色模式】切换为【灰度模式】\n";
+				g_srcImage.copyTo(g_dstImage);
+				g_maskImage = Scalar::all(0);
+				g_bIsColor = true;//将标识符置为true，表示当前图像模式为彩色  
 			}
+			break;
+		case '2'://显示/隐藏掩膜窗口  
+			if (g_bUseMask)
+			{
+				destroyWindow("mask");
+				g_bUseMask = false;
+			}
+			else
+			{
+				namedWindow("mask", 0);
+				g_maskImage = Scalar::all(0);
+				imshow("mask", g_maskImage);
+				g_bUseMask = true;
+			}
+			break;
+		case '3'://恢复原始图像
+			cout << "按键“3”被按下，恢复原始图像\n";
+			g_srcImage.copyTo(g_dstImage);
+			cvtColor(g_dstImage, g_grayImage, COLOR_BGR2GRAY);
+			g_maskImage = Scalar::all(0);
+			break;
+		case '4'://使用空范围的漫水填充 
+			cout << "按键“4”被按下，使用空范围的漫水填充\n";
+			g_nFillMode = 0;
+			break;
+		case '5'://使用渐变、固定范围的漫水填充
+			cout << "按键“5”被按下，使用渐变、固定范围的漫水填充\n";
+			g_nFillMode = 1;
+			break;
+		case '6'://使用渐变、浮动范围的漫水填充 
+			cout << "按键“6”被按下，使用渐变、浮动范围的漫水填充\n";
+			g_nFillMode = 2;
+			break;
+		case '7'://操作标志符的低八位使用4位的连接模式  
+			cout << "按键“7”被按下，操作标志符的低八位使用4位的连接模式\n";
+			g_nConnectivity = 4;
+			break;
+		case '8'://操作标志符的低八位使用8位的连接模式
+			cout << "按键“8”被按下，操作标志符的低八位使用8位的连接模式\n";
+			g_nConnectivity = 8;
+			break;
 		}
 	}
-	//绘制结果
-	circle(src, center, maxdist, Scalar(0, 0, 255));
-	imshow("dst", src);
-	waitKey();
-	return 0;
-}
-
-int main(int argc, char** argv)
-{
-	//contoursShow();
-	//circle_stone();
-	find_maxCircle();
 }
