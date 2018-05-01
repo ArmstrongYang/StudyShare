@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "list.cpp"
+
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -18,6 +20,6 @@ int main(int argc, char* argv[])
 	cout << Str0 << endl;
 	cout << Str1 +' ' + Str2 << endl;
 	cout << "Str1 len: " <<Str1.size()<< endl;
-
+	main_list();
 	return 0;
 }
